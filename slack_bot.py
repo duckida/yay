@@ -16,25 +16,6 @@ class SlackBot:
         self._bot_token = bot_token
         self._ws = None
 
-    def post_message(self, text, channel):
-        response = request(
-            "POST",
-            "https://slack.com/api/chat.postMessage",
-            headers={
-                "Authorization": f"Bearer {self._bot_token}",
-                "Content-Type": "application/json;charset=utf8",
-            },
-            data=json.dumps({"channel": channel, "text": text}),
-        )
-
-        response_json = response.json()
-        response.close()
-
-        print(response_json)
-
-        if not response_json["ok"]:
-            raise Exception(response_json["error"])
-
     def poll(self):
         if self._ws is None or not self._ws.connected():
             response = request(
