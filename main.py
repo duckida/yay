@@ -11,6 +11,10 @@ from slack_bot import SlackBot
 import time
 import config
 
+from picozero import Servo
+
+servo = Servo(0)
+
 print(f"Connecting to Wi-Fi SSID: {config.WIFI_SSID}")
 
 # initialize the Wi-Fi interface
@@ -34,10 +38,7 @@ while True:
     if event is None:
         continue
 
-    #print(event)
-
     event_type = event["type"]
-    # print(event_type)
 
 
     if event_type == "events_api":
@@ -48,3 +49,8 @@ while True:
                     if element["type"] == "emoji":
                         if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
                             print("YAY!")
+                            for i in range(3):
+                                servo.value = 0.5
+                                time.sleep(0.2)
+                                servo.value = 0
+                                time.sleep(0.2)
