@@ -26,6 +26,7 @@ while not wlan.isconnected():
 print(f"Connected to Wi-Fi SSID: {config.WIFI_SSID}")
 
 slack_bot = SlackBot(config.SLACK_APP_TOKEN, config.SLACK_BOT_TOKEN)
+print("Ready for events")
 
 while True:
     event = slack_bot.poll()
@@ -33,34 +34,17 @@ while True:
     if event is None:
         continue
 
-    print("event", event)
+    #print(event)
 
     event_type = event["type"]
-    print(event_type)
+    # print(event_type)
 
-    if event_type == "hello":
-        print("Got hello")
-    elif event_type == "events_api":
-        envelope_id = event["envelope_id"]
-        payload_type = event["payload"]["type"]
-        ack_payload = None
 
-        if payload_type == "event_callback":
-            payload_event_type = event["payload"]["event"]["type"]
-            payload_event_channel = event["payload"]["event"]["channel"]
-            post_msg_text = None
-
-            if payload_event_type == "app_mention":
-                text = event["payload"]["event"]["text"]
-
-                print("app_mention", text)
-
-                if "led on" in text.lower():
-                    post_msg_text = "The LED is now on :bulb:"
-                elif "led off" in text.lower():
-                    post_msg_text = "The LED is now off"
-
-            slack_bot.acknowledge_event(envelope_id, ack_payload)
-
-            if post_msg_text is not None:
-                slack_bot.post_message(post_msg_text, payload_event_channel)
+    if event_type == "events_api":
+        blocks = event["payload"]["event"]["blocks"]
+        for block in blocks:
+            for section in block["elements"]:
+                for element in section["elements"]:
+                    if element["type"] == "emoji":
+                        if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
+                            print("YAY!")
