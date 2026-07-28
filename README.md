@@ -2,6 +2,8 @@
 
 This is a mod for the physical 3D-printed :yay: emoji, which moves it up and down using a servo when a message containing :yay: is sent on Slack!
 
+it's mostly based on [ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w](https://github.com/ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w/tree/main)
+
 ## setup instructions
 1. Wire a servo to GP0, 5V and GND of a Pico W
 2. Install MicroPython on the Pico W
