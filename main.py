@@ -50,7 +50,14 @@ while True:
                         if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
                             print("YAY!")
                             for i in range(3):
-                                servo.value = 0.5
+                                servo.value = 0.8
                                 time.sleep(0.2)
                                 servo.value = 0
                                 time.sleep(0.2)
+                        elif element["name"] == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
+                            print("yayayayayay!")
+                            for i in range(3):
+                                servo.value = 0.8
+                                time.sleep(0.1)
+                                servo.value = 0
+                                time.sleep(0.1)
