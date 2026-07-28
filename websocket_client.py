@@ -6,7 +6,7 @@
 from os import urandom
 
 from binascii import b2a_base64
-import socket
+import socket as usocket
 import ssl
 
 TYPE_TEXT = const(0x1)
@@ -43,7 +43,7 @@ class WebSocket:
         try:
             s.connect(sockaddr)
             if proto == "wss:":
-                s = ussl.wrap_socket(s, server_hostname=host)
+                s = ssl.wrap_socket(s, server_hostname=host)
 
             key = urandom(16)
 
