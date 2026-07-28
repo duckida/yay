@@ -9,3 +9,4 @@ it's mostly based on [ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w](ht
 2. Install MicroPython on the Pico W
 3. Clone this repo: `git clone https://github.com/duckida/yay && cd yay`
 4. Copy all the `.py` files to the Pico
+5. Fill in your details in `config.py`
