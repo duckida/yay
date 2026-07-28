@@ -13,7 +13,6 @@ import config
 
 from picozero import Servo
 
-servo = Servo(0)
 
 print(f"Connecting to Wi-Fi SSID: {config.WIFI_SSID}")
 
@@ -47,6 +46,7 @@ while True:
             for section in block["elements"]:
                 for element in section["elements"]:
                     if element["type"] == "emoji":
+                        servo = Servo(0) # init servo
                         if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
                             print("YAY!")
                             for i in range(3):
@@ -54,10 +54,12 @@ while True:
                                 time.sleep(0.2)
                                 servo.value = 0
                                 time.sleep(0.2)
+                                servo.close() # close to remove jitter
                         elif element["name"] == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
                             print("yayayayayay!")
                             for i in range(3):
                                 servo.value = 0.8
-                                time.sleep(0.1)
+                                time.sleep(0.15)
                                 servo.value = 0
-                                time.sleep(0.1)
+                                time.sleep(0.15)
+                                servo.close()
