@@ -6,10 +6,9 @@
 
 
 import network
-
 from machine import Pin
 from slack_bot import SlackBot
-
+import time
 import config
 
 print(f"Connecting to Wi-Fi SSID: {config.WIFI_SSID}")
@@ -37,6 +36,7 @@ while True:
     print("event", event)
 
     event_type = event["type"]
+    print(event_type)
 
     if event_type == "hello":
         print("Got hello")

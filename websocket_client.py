@@ -5,9 +5,9 @@
 
 from os import urandom
 
-from ubinascii import b2a_base64
-import usocket
-import ussl
+from binascii import b2a_base64
+import socket
+import ssl
 
 TYPE_TEXT = const(0x1)
 TYPE_BINARY = const(0x2)
