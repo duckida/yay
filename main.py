@@ -31,6 +31,24 @@ print(f"Connected to Wi-Fi SSID: {config.WIFI_SSID}")
 slack_bot = SlackBot(config.SLACK_APP_TOKEN, config.SLACK_BOT_TOKEN)
 print("Ready for events")
 
+def yay():
+    for i in range(3):
+        servo.value = 0.8
+        time.sleep(0.2)
+        servo.value = 0
+        time.sleep(0.2)
+
+    servo.off() # close to remove jitter
+
+def yayayayayay():
+    for i in range(3):
+        servo.value = 0.8
+        time.sleep(0.15)
+        servo.value = 0
+        time.sleep(0.15)
+
+    servo.off()
+
 def main():
     while True:
         event = slack_bot.poll()
@@ -38,38 +56,37 @@ def main():
         if event is None:
             continue
 
+        print(event)
+
         event_type = event["type"]
 
 
         if event_type == "events_api":
-            blocks = event["payload"]["event"]["blocks"]
-            for block in blocks:
-                for section in block["elements"]:
-                    for element in section["elements"]:
-                        if element["type"] == "emoji":
-                            if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
-                                print("YAY!")
-                                for i in range(3):
-                                    servo.value = 0.8
-                                    time.sleep(0.2)
-                                    servo.value = 0
-                                    time.sleep(0.2)
+            if event["payload"]["event"]["type"] == "reaction_added": # reactino of :yay:
+                if event["payload"]["event"]["reaction"] == "yay":
+                    print("reaction: yay!")
+                    yay()
+                elif event["payload"]["event"]["reaction"] == "yayayayayay":
+                    print("reaction: yayayayayay!")
+                    yayayayayay()
 
-                                servo.off() # close to remove jitter
+            elif event["payload"]["event"]["type"] == "message": # text message containing :yay:
+                blocks = event["payload"]["event"]["blocks"]
+                for block in blocks:
+                    for section in block["elements"]:
+                        for element in section["elements"]:
+                            if element["type"] == "emoji": # it's an emoji
+                                if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
+                                    print("message: yay!")
+                                    yay()
 
-                            elif element["name"] == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
-                                print("yayayayayay!")
-                                for i in range(3):
-                                    servo.value = 0.8
-                                    time.sleep(0.15)
-                                    servo.value = 0
-                                    time.sleep(0.15)
-
-                                servo.off()
+                                elif element["name"] == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
+                                    print("message: yayayayayay!")
+                                    yayayayayay()
 
 if __name__ == "__main__":
     try:
         main()
-    except:
+    except Exception as _:
         time.sleep(1)
         reset()
