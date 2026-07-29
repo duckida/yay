@@ -5,8 +5,22 @@ This is a mod for the physical 3D-printed :yay: emoji, which moves it up and dow
 it's mostly based on [ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w](https://github.com/ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w/tree/main)
 
 ## setup instructions
-1. Wire a servo to GP0, 5V and GND of a Pico W
-2. Install MicroPython on the Pico W
-3. Clone this repo: `git clone https://github.com/duckida/yay && cd yay`
-4. Copy all the `.py` files to the Pico
-5. Fill in your details in `config.py`
+### hardware
+You will need a Pico W and SG90 micro servo
+- Wire a servo to GP0, 5V and GND of a Pico W
+- Put the Pico W in BOOTSELL mode and install MicroPython
+
+### software
+- Clone this repo: `git clone https://github.com/duckida/yay && cd yay`
+- Copy all the `.py` files to the Pico
+- Fill in your WiFi details in `config.py`
+
+### Slack bot setup
+Don't forget to save changes as you go!
+- Visit https://api.slack.com/apps and create a new app
+- Fill in the basic details like name and description
+- Under Settings→Socket Mode turn on Socket Mode
+- Under Features→OAuth and Permissions, scroll to Scopes, and add `app_mentions:read`, `channels:history`, and `reactions:read`
+- Copy the Bot User OAuth Token and paste it in `config.py` as the bot token
+- Under Features→Event Subscriptions, under Subscribe to Bot Events, enable `app_mention`, `message.channels`, and `reaction_added`
+- Go to Settings→Basic Information, scroll to App-Level Tokens, create one, and copy that into `config.py` as the app token
