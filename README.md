@@ -1,8 +1,10 @@
 # yay
 
-This is a mod for the physical 3D-printed :yay: emoji, which moves it up and down using a servo when a message containing :yay: is sent on Slack!
+An attachment for a 3D-printed :yay: emoji, that moves its arms when a :yay: is sent or reacted Slack!
 
-it's mostly based on [ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w](https://github.com/ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w/tree/main)
+![The yay moving its arms](yay-demo.gif)
+
+The Slack bot code is based on [ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w](https://github.com/ArmDeveloperEcosystem/example-of-a-slackbot-for-pico-w/tree/main)
 
 ## setup instructions
 ### hardware
@@ -24,3 +26,4 @@ Don't forget to save changes as you go!
 - Copy the Bot User OAuth Token and paste it in `config.py` as the bot token
 - Under Features→Event Subscriptions, under Subscribe to Bot Events, enable `app_mention`, `message.channels`, and `reaction_added`
 - Go to Settings→Basic Information, scroll to App-Level Tokens, create one, and copy that into `config.py` as the app token
+- Install the app in your workspace and add it to channels you want to use it in!
