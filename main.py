@@ -62,6 +62,9 @@ def main():
 
 
         if event_type == "events_api":
+            envelope_id = event["envelope_id"]
+            slack_bot.acknowledge_event(envelope_id, None)
+
             if event["payload"]["event"]["type"] == "reaction_added": # reactino of :yay:
                 if event["payload"]["event"]["reaction"] == "yay" and event["retry_attempt"] == 0:
                     print("reaction: yay!")
@@ -87,6 +90,7 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except Exception as _:
+    except Exception as e:
+        print("Crashed:", e)
         time.sleep(1)
         reset()
