@@ -9,7 +9,7 @@ The Slack bot code is based on [ArmDeveloperEcosystem/example-of-a-slackbot-for-
 ## setup instructions
 ### hardware
 You will need a Pico W and SG90 micro servo
-- Wire a servo to GP0, 5V and GND of a Pico W
+- Wire a servo to GP0, VBUS and GND of a Pico W as shown in the diagram
 - Put the Pico W in BOOTSELL mode and install MicroPython
 
 ### software
