@@ -60,16 +60,18 @@ def main():
 
         event_type = event["type"]
 
-
-        if event_type == "events_api":
-            envelope_id = event["envelope_id"]
+        envelope_id = event.get("envelope_id")
+        if envelope_id is not None:
             slack_bot.acknowledge_event(envelope_id, None)
 
+
+        if event_type == "events_api":
+
             if event["payload"]["event"]["type"] == "reaction_added": # reactino of :yay:
-                if event["payload"]["event"]["reaction"] == "yay" and event["retry_attempt"] == 0:
+                if event["payload"]["event"]["reaction"] == "yay": # and event["retry_attempt"] == 0:
                     print("reaction: yay!")
                     yay()
-                elif event["payload"]["event"]["reaction"] == "yayayayayay" and event["retry_attempt"] == 0:
+                elif event["payload"]["event"]["reaction"] == "yayayayayay": # and event["retry_attempt"] == 0:
                     print("reaction: yayayayayay!")
                     yayayayayay()
 
@@ -79,11 +81,11 @@ def main():
                     for section in block["elements"]:
                         for element in section["elements"]:
                             if element["type"] == "emoji": # it's an emoji
-                                if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
+                                if element["name"] == "yay":# and event["retry_attempt"] == 0: # it's also the first one
                                     print("message: yay!")
                                     yay()
 
-                                elif element["name"] == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
+                                elif element["name"] == "yayayayayay":# and event["retry_attempt"] == 0: # yayayayay go faster
                                     print("message: yayayayayay!")
                                     yayayayayay()
 
