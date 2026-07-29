@@ -30,3 +30,6 @@ Don't forget to save changes as you go!
 - Under Features→Event Subscriptions, under Subscribe to Bot Events, enable `app_mention`, `message.channels`, and `reaction_added`
 - Go to Settings→Basic Information, scroll to App-Level Tokens, create one, and copy that into `config.py` as the app token
 - Install the app in your workspace and add it to channels you want to use it in!
+
+## AI usage declaration
+AI was used to help me understand errors some if statements and for help with power brownouts.
