@@ -12,6 +12,9 @@ You will need a Pico W and SG90 micro servo
 - Wire a servo to GP0, VBUS and GND of a Pico W as shown in the diagram
 - Put the Pico W in BOOTSELL mode and install MicroPython
 
+<img width="612" height="482" alt="image" src="https://github.com/user-attachments/assets/6d9a7eb9-28f2-4e57-8493-266a36b665c9" />
+
+
 ### software
 - Clone this repo: `git clone https://github.com/duckida/yay && cd yay`
 - Copy all the `.py` files to the Pico
