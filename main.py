@@ -6,7 +6,7 @@
 
 
 import network
-from machine import Pin
+from machine import Pin, reset
 from slack_bot import SlackBot
 import time
 import config
@@ -31,37 +31,45 @@ print(f"Connected to Wi-Fi SSID: {config.WIFI_SSID}")
 slack_bot = SlackBot(config.SLACK_APP_TOKEN, config.SLACK_BOT_TOKEN)
 print("Ready for events")
 
-while True:
-    event = slack_bot.poll()
+def main():
+    while True:
+        event = slack_bot.poll()
 
-    if event is None:
-        continue
+        if event is None:
+            continue
 
-    event_type = event["type"]
+        event_type = event["type"]
 
 
-    if event_type == "events_api":
-        blocks = event["payload"]["event"]["blocks"]
-        for block in blocks:
-            for section in block["elements"]:
-                for element in section["elements"]:
-                    if element["type"] == "emoji":
-                        if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
-                            print("YAY!")
-                            for i in range(3):
-                                servo.value = 0.8
-                                time.sleep(0.2)
-                                servo.value = 0
-                                time.sleep(0.2)
+        if event_type == "events_api":
+            blocks = event["payload"]["event"]["blocks"]
+            for block in blocks:
+                for section in block["elements"]:
+                    for element in section["elements"]:
+                        if element["type"] == "emoji":
+                            if element["name"] == "yay" and event["retry_attempt"] == 0: # it's also the first one
+                                print("YAY!")
+                                for i in range(3):
+                                    servo.value = 0.8
+                                    time.sleep(0.2)
+                                    servo.value = 0
+                                    time.sleep(0.2)
 
-                            servo.off() # close to remove jitter
+                                servo.off() # close to remove jitter
 
-                        elif element["name"] == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
-                            print("yayayayayay!")
-                            for i in range(3):
-                                servo.value = 0.8
-                                time.sleep(0.15)
-                                servo.value = 0
-                                time.sleep(0.15)
+                            elif element["name"] == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
+                                print("yayayayayay!")
+                                for i in range(3):
+                                    servo.value = 0.8
+                                    time.sleep(0.15)
+                                    servo.value = 0
+                                    time.sleep(0.15)
 
-                            servo.off()
+                                servo.off()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except:
+        time.sleep(1)
+        reset()
