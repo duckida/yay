@@ -63,10 +63,10 @@ def main():
 
         if event_type == "events_api":
             if event["payload"]["event"]["type"] == "reaction_added": # reactino of :yay:
-                if event["payload"]["event"]["reaction"] == "yay":
+                if event["payload"]["event"]["reaction"] == "yay" and event["retry_attempt"] == 0:
                     print("reaction: yay!")
                     yay()
-                elif event["payload"]["event"]["reaction"] == "yayayayayay":
+                elif event["payload"]["event"]["reaction"] == "yayayayayay" and event["retry_attempt"] == 0:
                     print("reaction: yayayayayay!")
                     yayayayayay()
 
