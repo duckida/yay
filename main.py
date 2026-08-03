@@ -76,10 +76,10 @@ def main():
 
         if event_type == "events_api":
             if event.get("payload",[]).get("event",[]).get("type",[]) == "reaction_added": # reactino of :yay:
-                if event.get("payload",[]).get("event",[]).get("reaction",[]) == "yay": # and event["retry_attempt"] == 0:
+                if event.get("payload",[]).get("event",[]).get("reaction",[]) == "yay" and event["retry_attempt"] == 0:
                     print("reaction: yay!")
                     yay()
-                elif event.get("payload",[]).get("event",[]).get("reaction",[]) == "yayayayayay": # and event["retry_attempt"] == 0:
+                elif event.get("payload",[]).get("event",[]).get("reaction",[]) == "yayayayayay" and event["retry_attempt"] == 0:
                     print("reaction: yayayayayay!")
                     yayayayayay()
 
@@ -89,11 +89,11 @@ def main():
                     for section in block.get("elements", []):
                         for element in section.get("elements", []):
                             if element.get("type",[]) == "emoji": # it's an emoji
-                                if element.get("name",[]) == "yay":# and event["retry_attempt"] == 0: # it's also the first one
+                                if element.get("name",[]) == "yay" and event["retry_attempt"] == 0: # it's also the first one
                                     print("message: yay!")
                                     yay()
 
-                                elif element.get("name",[]) == "yayayayayay":# and event["retry_attempt"] == 0: # yayayayay go faster
+                                elif element.get("name",[]) == "yayayayayay" and event["retry_attempt"] == 0: # yayayayay go faster
                                     print("message: yayayayayay!")
                                     yayayayayay()
 
