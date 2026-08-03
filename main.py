@@ -21,12 +21,15 @@ wlan = network.WLAN(network.STA_IF)
 
 # activate and connect to the Wi-Fi network:
 wlan.active(True)
-wlan.connect(config.WIFI_SSID, config.WIFI_PASSWORD)
+try:
+    wlan.connect(config.WIFI_SSID, config.WIFI_PASSWORD)
+    while not wlan.isconnected():
+        time.sleep(0.2)
+        print(".")
 
-while not wlan.isconnected():
-    time.sleep(0.5)
-
-print(f"Connected to Wi-Fi SSID: {config.WIFI_SSID}")
+    print(f"Connected to Wi-Fi SSID: {config.WIFI_SSID}")
+except Exception as e:
+    print("failed to connect")
 
 slack_bot = SlackBot(config.SLACK_APP_TOKEN, config.SLACK_BOT_TOKEN)
 print("Ready for events")
@@ -59,7 +62,7 @@ def main():
             if event is None:
                 continue
 
-            print(event)
+            # print(event) # removed for prod as it uses a lot of serial bandwidth
 
             event_type = event.get("type", [])
 
