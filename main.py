@@ -4,15 +4,14 @@
 # SPDX-License-Identifier: MIT
 #
 
-
 import network
 from machine import Pin, reset
 from slack_bot import SlackBot
 import time
 import config
 
-from picozero import Servo
-servo = Servo(0)
+from servo import Servo
+servo = Servo(4)
 
 print(f"Connecting to Wi-Fi SSID: {config.WIFI_SSID}")
 
@@ -36,21 +35,21 @@ print("Ready for events")
 
 def yay():
     for i in range(3):
-        servo.value = 0.8
+        servo.write_angle(90)
         time.sleep(0.2)
-        servo.value = 0
+        servo.write_angle(0)
         time.sleep(0.2)
 
-    servo.off() # close to remove jitter
+    # servo.off() # close to remove jitter
 
 def yayayayayay():
     for i in range(3):
-        servo.value = 0.8
+        servo.write_angle(90)
         time.sleep(0.15)
-        servo.value = 0
+        servo.write_angle(0)
         time.sleep(0.15)
 
-    servo.off()
+    # servo.off()
 
 def main():
     while True:
