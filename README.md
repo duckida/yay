@@ -12,20 +12,18 @@ The Slack bot code is based on [ArmDeveloperEcosystem/example-of-a-slackbot-for-
 ### bill of materials
 | Product | Quantity | Price (GBP) | Link |
 | :--- | :---: | :---: | :--- |
-| Raspberry Pi Pico W | 1 | 5.80 | [Link](https://thepihut.com/products/raspberry-pi-pico-w) |
+| ESP32 C3 SuperMini | 1 | 2.44 | [Link](https://www.aliexpress.com/item/1005008234672660.html?spm=a2g0o.productlist.main.4.deda6647XHU4Vi&aem_p4p_detail=202609120912169704214977795140000158710&algo_pvid=53ecbb60-9368-4579-b89d-fb3343f11cf6&algo_exp_id=53ecbb60-9368-4579-b89d-fb3343f11cf6-3&pdp_ext_f=%7B%22order%22%3A%222312%22%2C%22spu_best_type%22%3A%22price%22%2C%22eval%22%3A%221%22%2C%22fromPage%22%3A%22search%22%7D&pdp_npi=6%40dis%21GBP%212.61%212.60%21%21%213.42%213.41%21%402103842a17892295367764229e0f5a%2112000044321264943%21sea%21UK%216546500973%21ABX%211%210%21n_tag%3A-29910%3Bd%3A7683b1f4%3Bm03_new_user%3A-29895%3BpisId%3A5000000211438706&curPageLogUid=gSGXP5SobNPj&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005008234672660%7C_p_origin_prod%3A&search_p4p_id=202609120912169704214977795140000158710_1) |
 | SG90 Micro Servo | 1 | 4.00 | [Link](https://thepihut.com/products/towerpro-servo-motor-sg90-digital) |
 
-You will need a Pico W and SG90 micro servo
-- Wire a servo to GP0, VBUS and GND of a Pico W as shown in the diagram
-- Put the Pico W in BOOTSELL mode and install MicroPython
+You will need an ESP32 SuperMini and SG90 micro servo
+- Wire a servo to GP4, 5V and GND of the ESP32 as shown in the diagram
+- Install MicroPython to the ESP32 using esptool.py
 - 3D-print the `servo-arm.stl`
-
-<img width="612" height="482" alt="image" src="https://github.com/user-attachments/assets/6d9a7eb9-28f2-4e57-8493-266a36b665c9" />
 
 
 ### software
 - Clone this repo: `git clone https://github.com/duckida/yay && cd yay`
-- Copy all the `.py` files to the Pico
+- Copy all the `.py` files to the ESP
 - Fill in your WiFi details in `config.py`
 
 ### Slack bot setup
