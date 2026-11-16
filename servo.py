@@ -41,3 +41,7 @@ class Servo:
         total_range = self.max_us - self.min_us
         us = self.min_us + total_range * degrees // self.angle
         self.write_us(us)
+
+    def off(self):
+        """Stop sending pulses so the servo stops holding position."""
+        self.write_us(0)
